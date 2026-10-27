@@ -48,7 +48,7 @@ async function readMessages(db: GenericDatabaseReader<any>) {
     scanDesc: scanDesc.map((doc) => doc.body),
     byCreationTime: byCreationTime.map((doc) => doc.body),
     bySarah: bySarah.map((doc) => doc.body),
-    searchHello: searchHello.map((doc) => doc.body).sort(),
+    searchHello: searchHello.map((doc) => doc.body),
   };
 }
 
@@ -166,7 +166,7 @@ test("writes inside a transaction are seen by its own queries", async () => {
     scanDesc: ["hello kept", "hello temp", "hello committed"],
     byCreationTime: ["hello committed", "hello temp", "hello kept"],
     bySarah: ["hello committed", "hello temp"],
-    searchHello: ["hello committed", "hello kept", "hello temp"],
+    searchHello: ["hello committed", "hello temp", "hello kept"],
   });
   expect(inside.afterDelete).toEqual({
     scan: ["hello kept"],
